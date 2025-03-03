@@ -32,7 +32,6 @@ class QuestionModel(MainModel):
         category: str
         question: str
         correct_answer: str
-        all_answers: list
     """
     id: int
     difficulty: str

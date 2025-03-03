@@ -1,18 +1,18 @@
 from fastapi import APIRouter, Depends, HTTPException, status, Path
 from sqlalchemy.ext.asyncio import AsyncSession
+from typing import List
 
 from data.database_connection import generate_async_session
-from models.quetion_model import QuestionModel
-from services import question_service
+from models.answer_model import AnswerModel
+from services.answers_service import retrieve_all_answers_by_id_async
 
 api_router = APIRouter()
 
 
 @api_router.get(
-    "/question/{question_id}",
-    response_model=QuestionModel,
-    status_code=status.HTTP_200_OK,
-    summary="Retrieves a Player by its Id",
+    "/answers/{question_id}",
+    response_model=List[AnswerModel],
+    status_code=status.HTTP_200_OK
 )
 
 async def get_by_id_async(
@@ -32,7 +32,7 @@ async def get_by_id_async(
     Raises:
         HTTPException: Not found error if the Player with the specified ID does not exist.
     """
-    question = await question_service.retrieve_by_id_async(async_session, question_id)
-    if not question:
+    answers = await retrieve_all_answers_by_id_async(async_session, question_id)
+    if not answers:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND)
-    return question
+    return answers

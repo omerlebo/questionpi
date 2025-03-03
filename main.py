@@ -4,6 +4,7 @@
 
 from fastapi import FastAPI
 from routes import question
+from routes import answer
 
 
 app = FastAPI(title="python-samples-fastapi-restful",
@@ -11,3 +12,4 @@ app = FastAPI(title="python-samples-fastapi-restful",
               version="1.0.0",)
 
 app.include_router(question.api_router)
+app.include_router(answer.api_router)

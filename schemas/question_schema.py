@@ -3,7 +3,7 @@
 # ------------------------------------------------------------------------------
 
 from sqlalchemy import Column, String, Integer, Text
-from data.question_database import Base
+from data.database_connection import Base
 
 
 class Question(Base):
